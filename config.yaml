@@ -1,7 +1,7 @@
 # hugo server --minify --themesDir ../.. --baseURL=http://0.0.0.0:1313/theme/hugo-book/
 
-baseURL: https://example.com/
-title: Hugo Book
+# baseURL: https://HUSTSeclab.github.io/docs/
+title: HUSTSecLab Docs
 theme: hugo-book
 
 # Book configuration
@@ -30,12 +30,12 @@ languages:
 menu:
   # before: []
   after:
-    - name: "Github"
-      url: "https://github.com/alex-shpak/hugo-book"
+    - name: "GitHub"
+      url: "https://github.com/HUSTSeclab/docs"
       weight: 10
-    - name: "Hugo Themes"
-      url: "https://themes.gohugo.io/hugo-book/"
-      weight: 20
+    # - name: "Hugo Themes"
+    #   url: "https://themes.gohugo.io/hugo-book/"
+    #   weight: 20
 
 params:
   # (Optional, default light) Sets color theme: light, dark or auto.
