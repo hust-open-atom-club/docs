@@ -2,15 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>HUSTSecLab Docs</title>
-    <link>/</link>
+    <link>https://www.xcodesucks.top/docs/</link>
     <description>Recent content on HUSTSecLab Docs</description>
-    <generator>Hugo -- gohugo.io</generator><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.xcodesucks.top/docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>/docs/Kernel-FAQ/</link>
+      <link>https://www.xcodesucks.top/docs/docs/Kernel-FAQ/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/Kernel-FAQ/</guid>
+      <guid>https://www.xcodesucks.top/docs/docs/Kernel-FAQ/</guid>
       <description>Kernel Contribution FAQ #  </description>
     </item>
     

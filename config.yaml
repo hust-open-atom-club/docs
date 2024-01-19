@@ -1,6 +1,6 @@
 # hugo server --minify --themesDir ../.. --baseURL=http://0.0.0.0:1313/theme/hugo-book/
 
-# baseURL: https://HUSTSeclab.github.io/docs/
+baseURL: https://www.xcodesucks.top/docs/
 title: HUSTSecLab Docs
 theme: hugo-book
 
