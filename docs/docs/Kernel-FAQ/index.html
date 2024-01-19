@@ -3,22 +3,38 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Kernel Contribution FAQ #  ">
+<meta name="description" content="Kernel Contribution FAQ #  注意事项 #    在git format-patch生成patch文件以后，使用./scripts/checkpatch.pl ${PATCH_FILE}检查patch文件时，warning是不可忽略的。
+  git send-email时出现的很多错误可以用重发几次的方法解决。
+   https://docs.kernel.org/process/submitting-patches.html
+  可以在https://groups.google.com/g/hust-os-kernel-patches查看团队过去发送的patch。
+  请在 gitconfig 中将 name 设置成自己的真名。
+  Issue 修复参考 #  Missing unwind goto &hellip; #  参考 Dan 的 Blog：内核错误处理规范
+ https://staticthinking.wordpress.com/2022/04/28/free-the-last-thing-style/
+XXX is an error pointer or valid #  Return from debugfs_create_dir
+Debugfs is kind of weird. The correct thing here is just to delete the NULL check.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="" />
-<meta property="og:description" content="Kernel Contribution FAQ #  " />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Kernel FAQ" />
+<meta property="og:description" content="Kernel Contribution FAQ #  注意事项 #    在git format-patch生成patch文件以后，使用./scripts/checkpatch.pl ${PATCH_FILE}检查patch文件时，warning是不可忽略的。
+  git send-email时出现的很多错误可以用重发几次的方法解决。
+   https://docs.kernel.org/process/submitting-patches.html
+  可以在https://groups.google.com/g/hust-os-kernel-patches查看团队过去发送的patch。
+  请在 gitconfig 中将 name 设置成自己的真名。
+  Issue 修复参考 #  Missing unwind goto &hellip; #  参考 Dan 的 Blog：内核错误处理规范
+ https://staticthinking.wordpress.com/2022/04/28/free-the-last-thing-style/
+XXX is an error pointer or valid #  Return from debugfs_create_dir
+Debugfs is kind of weird. The correct thing here is just to delete the NULL check." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.xcodesucks.top/docs/docs/Kernel-FAQ/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-01-19T19:58:18+08:00" />
 
-<title>Kernel Faq | HUSTSecLab Docs</title>
+
+<title>Kernel FAQ | HUSTSecLab Docs</title>
 <link rel="manifest" href="/docs/manifest.json">
 <link rel="icon" href="/docs/favicon.png" >
 <link rel="stylesheet" href="/docs/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
   <script defer src="/docs/flexsearch.min.js"></script>
-  <script defer src="/docs/zh.search.min.9a1f549c2df3d79bab6fb0931281fdc62acb8682c44202463dd02785ddbf8792.js" integrity="sha256-mh9UnC3z15urb7CTEoH9xirLhoLEQgJGPdAnhd2/h5I=" crossorigin="anonymous"></script>
+  <script defer src="/docs/zh.search.min.b9aab79765b5b131b5d5176038b116631e11e6b42699b6d7e78c671e8b5ae8d9.js" integrity="sha256-uaq3l2W1sTG11RdgOLEWYx4R5rQmmbbX54xnHota6Nk=" crossorigin="anonymous"></script>
 
   <script defer src="/docs/sw.min.2ab1e3340de39c3cdde4c38b14eb27de79536813e9f0c57a364c21cef9582fe6.js" integrity="sha256-KrHjNA3jnDzd5MOLFOsn3nlTaBPp8MV6NkwhzvlYL&#43;Y=" crossorigin="anonymous"></script>
 <!--
@@ -72,7 +88,20 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/docs/Kernel-FAQ/" class="active">Kernel Faq</a>
+    <a href="/docs/docs/Kernel-Contribution/" class="">Kernel Contrbution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docs/Kernel-FAQ/" class="active">Kernel FAQ</a>
   
 
         </li>
@@ -126,7 +155,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/docs/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Kernel Faq</strong>
+  <strong>Kernel FAQ</strong>
 
   <label for="toc-control">
     
@@ -142,7 +171,30 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#kernel-contribution-faq">Kernel Contribution FAQ</a></li>
+    <li><a href="#kernel-contribution-faq">Kernel Contribution FAQ</a>
+      <ul>
+        <li><a href="#注意事项">注意事项</a></li>
+        <li><a href="#issue-修复参考">Issue 修复参考</a>
+          <ul>
+            <li><a href="#missing-unwind-goto-">Missing unwind goto &hellip;</a></li>
+            <li><a href="#xxx-is-an-error-pointer-or-valid">XXX is an error pointer or valid</a></li>
+          </ul>
+        </li>
+        <li><a href="#patch-相关问题">Patch 相关问题</a>
+          <ul>
+            <li><a href="#我应该何时添加-reviewed-by-标签">我应该何时添加 Reviewed-by 标签？</a></li>
+            <li><a href="#commit-title-前面的-xxx-yyy-是什么如何编写合适的-commit-title">Commit Title 前面的 xxx: yyy: 是什么？如何编写合适的 Commit Title？</a></li>
+            <li><a href="#我在发送第二版-patch-时需要注意什么">我在发送第二版 Patch 时需要注意什么？</a></li>
+            <li><a href="#把-patch-发送到内核邮件列表之后很长时间没有回复怎么办">把 Patch 发送到内核邮件列表之后很长时间没有回复怎么办？</a></li>
+            <li><a href="#我的第一版-patch-存在问题如何在第一版的基础上生成第二版的-format-patch">我的第一版 Patch 存在问题，如何在第一版的基础上生成第二版的 format-patch？</a></li>
+            <li><a href="#内核邮件列表中-patch-主题的-patch--xx-都是什么意思我要怎么使用">内核邮件列表中 PATCH 主题的 [PATCH  xx] 都是什么意思？我要怎么使用？</a></li>
+            <li><a href="#我对分配给我的任务感到困难我应该向谁寻求帮助">我对分配给我的任务感到困难，我应该向谁寻求帮助？</a></li>
+            <li><a href="#我发现我得到的任务是-false-positive我应该怎么办">我发现我得到的任务是 False Positive，我应该怎么办？</a></li>
+            <li><a href="#patch-中的-fixes-标签是什么意思我何时应当添加要怎么添加">Patch 中的 Fixes 标签是什么意思？我何时应当添加？要怎么添加？</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -159,6 +211,182 @@ https://github.com/alex-shpak/hugo-book
   Kernel Contribution FAQ
   <a class="anchor" href="#kernel-contribution-faq">#</a>
 </h1>
+<h2 id="注意事项">
+  注意事项
+  <a class="anchor" href="#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9">#</a>
+</h2>
+<ol>
+<li>
+<p>在git format-patch生成patch文件以后，使用./scripts/checkpatch.pl ${PATCH_FILE}检查patch文件时，<strong>warning是不可忽略的</strong>。</p>
+</li>
+<li>
+<p>git send-email时出现的很多错误可以用<strong>重发几次</strong>的方法解决。</p>
+</li>
+<li>
+<p>
+  <a href="https://docs.kernel.org/process/submitting-patches.html">https://docs.kernel.org/process/submitting-patches.html</a></p>
+</li>
+<li>
+<p>可以在https://groups.google.com/g/hust-os-kernel-patches查看团队过去发送的patch。</p>
+</li>
+<li>
+<p><strong>请在 gitconfig 中将 name 设置成自己的真名。</strong></p>
+</li>
+</ol>
+<h2 id="issue-修复参考">
+  Issue 修复参考
+  <a class="anchor" href="#issue-%e4%bf%ae%e5%a4%8d%e5%8f%82%e8%80%83">#</a>
+</h2>
+<h3 id="missing-unwind-goto-">
+  Missing unwind goto &hellip;
+  <a class="anchor" href="#missing-unwind-goto-">#</a>
+</h3>
+<p>参考 Dan 的 Blog：内核错误处理规范</p>
+<p>
+  <a href="https://staticthinking.wordpress.com/2022/04/28/free-the-last-thing-style/">https://staticthinking.wordpress.com/2022/04/28/free-the-last-thing-style/</a></p>
+<h3 id="xxx-is-an-error-pointer-or-valid">
+  XXX is an error pointer or valid
+  <a class="anchor" href="#xxx-is-an-error-pointer-or-valid">#</a>
+</h3>
+<p>Return from debugfs_create_dir</p>
+<pre tabindex="0"><code>Debugfs is kind of weird.  The correct thing here is just to delete the
+NULL check.
+
+There are some times where a driver will do something weird with the
+dir-&gt;inode pointer so in that case we need to check for errors.  But if
+the driver doesn't dereference the dir pointer then we can just delete
+the error handling.
+
+The commit message would say:
+
+    [PATCH] wifi: mt7601u: delete dead code checking debugfs returns
+
+    Smatch reports that:
+      drivers/net/wireless/mediatek/mt7601u/debugfs.c:130
+      mt7601u_init_debugfs() warn: 'dir' is an error pointer or valid&quot;.
+
+    Debugfs code is not supposed to need error checking so instead of
+    changing this to if (IS_ERR()) the correct thing is to just delete
+    the dead code.
+
+The other question about this code is when are the debugfs files
+deleted?  I don't see that happening and it seems like it would lead to
+a use after free or something.
+
+Debugfs can only be written to by root and driver unload is a privileged
+operation so this is not a security issue but it would be a bug.
+
+regards,
+dan carpenter
+</code></pre><h2 id="patch-相关问题">
+  Patch 相关问题
+  <a class="anchor" href="#patch-%e7%9b%b8%e5%85%b3%e9%97%ae%e9%a2%98">#</a>
+</h2>
+<h3 id="我应该何时添加-reviewed-by-标签">
+  我应该何时添加 Reviewed-by 标签？
+  <a class="anchor" href="#%e6%88%91%e5%ba%94%e8%af%a5%e4%bd%95%e6%97%b6%e6%b7%bb%e5%8a%a0-reviewed-by-%e6%a0%87%e7%ad%be">#</a>
+</h3>
+<ul>
+<li>只有当大家看见这样的回复邮件时，你才可以在下一版本的patch中加上reviewed-by tag，否则，贸然加上别人的reviewed-by tag会很不礼貌。</li>
+</ul>
+<p>
+  <img src="images/reviewed-by.png" alt="reviewed-by" /></p>
+<h3 id="commit-title-前面的-xxx-yyy-是什么如何编写合适的-commit-title">
+  Commit Title 前面的 xxx: yyy: 是什么？如何编写合适的 Commit Title？
+  <a class="anchor" href="#commit-title-%e5%89%8d%e9%9d%a2%e7%9a%84-xxx-yyy-%e6%98%af%e4%bb%80%e4%b9%88%e5%a6%82%e4%bd%95%e7%bc%96%e5%86%99%e5%90%88%e9%80%82%e7%9a%84-commit-title">#</a>
+</h3>
+<ul>
+<li>可以使用git log &ndash;oneline ${FILE}查看其他人对该文件的commit标题，并仿照他们的标题。</li>
+</ul>
+<p>
+  <img src="images/commit-title.png" alt="commint-title" /></p>
+<h3 id="我在发送第二版-patch-时需要注意什么">
+  我在发送第二版 Patch 时需要注意什么？
+  <a class="anchor" href="#%e6%88%91%e5%9c%a8%e5%8f%91%e9%80%81%e7%ac%ac%e4%ba%8c%e7%89%88-patch-%e6%97%b6%e9%9c%80%e8%a6%81%e6%b3%a8%e6%84%8f%e4%bb%80%e4%b9%88">#</a>
+</h3>
+<ul>
+<li>
+<p>Change log.</p>
+<p>提交第二（n）版Patch时，需要在COMMIT MSG后面三个横线下面写上，最近的 change log 写在最上面，格式为：</p>
+<pre tabindex="0"><code>v2 -&gt; v3: ...
+v1 -&gt; v2: ...
+</code></pre><p>例子为：</p>
+</li>
+<li>
+<p>Subject prefix.</p>
+<p>使用[PATCH v2]而不是[PATCH]</p>
+</li>
+</ul>
+<h3 id="把-patch-发送到内核邮件列表之后很长时间没有回复怎么办">
+  把 Patch 发送到内核邮件列表之后很长时间没有回复怎么办？
+  <a class="anchor" href="#%e6%8a%8a-patch-%e5%8f%91%e9%80%81%e5%88%b0%e5%86%85%e6%a0%b8%e9%82%ae%e4%bb%b6%e5%88%97%e8%a1%a8%e4%b9%8b%e5%90%8e%e5%be%88%e9%95%bf%e6%97%b6%e9%97%b4%e6%b2%a1%e6%9c%89%e5%9b%9e%e5%a4%8d%e6%80%8e%e4%b9%88%e5%8a%9e">#</a>
+</h3>
+<p>可以回复“ping？”，但不要发送 PATCH V2 或 PATCH RESEND</p>
+<h3 id="我的第一版-patch-存在问题如何在第一版的基础上生成第二版的-format-patch">
+  我的第一版 Patch 存在问题，如何在第一版的基础上生成第二版的 format-patch？
+  <a class="anchor" href="#%e6%88%91%e7%9a%84%e7%ac%ac%e4%b8%80%e7%89%88-patch-%e5%ad%98%e5%9c%a8%e9%97%ae%e9%a2%98%e5%a6%82%e4%bd%95%e5%9c%a8%e7%ac%ac%e4%b8%80%e7%89%88%e7%9a%84%e5%9f%ba%e7%a1%80%e4%b8%8a%e7%94%9f%e6%88%90%e7%ac%ac%e4%ba%8c%e7%89%88%e7%9a%84-format-patch">#</a>
+</h3>
+<ul>
+<li>
+<p>还没有git send-email出去的patch，此时你的Patch依旧是第一版，不需要添加v2之类的信息</p>
+<ul>
+<li>如果是对代码的修改有问题，将代码重新修改后，使用git commit &ndash;amend -asev命令重新提交commit</li>
+<li>如果是commit message有误，则直接使用git commit &ndash;amend -asev命令，修改commit message即可</li>
+<li>修改完毕后，git format-patch -1即可生成新的patch</li>
+</ul>
+</li>
+<li>
+<p>已经发送出去的patch</p>
+<ul>
+<li>第一步和没有发送出去的patch一样，但是在format-patch的时候要指定subject git format-patch -1 &ndash;subject-prefix=&ldquo;PATCH v2&rdquo;</li>
+</ul>
+</li>
+</ul>
+<h3 id="内核邮件列表中-patch-主题的-patch--xx-都是什么意思我要怎么使用">
+  内核邮件列表中 PATCH 主题的 [PATCH  xx] 都是什么意思？我要怎么使用？
+  <a class="anchor" href="#%e5%86%85%e6%a0%b8%e9%82%ae%e4%bb%b6%e5%88%97%e8%a1%a8%e4%b8%ad-patch-%e4%b8%bb%e9%a2%98%e7%9a%84-patch--xx-%e9%83%bd%e6%98%af%e4%bb%80%e4%b9%88%e6%84%8f%e6%80%9d%e6%88%91%e8%a6%81%e6%80%8e%e4%b9%88%e4%bd%bf%e7%94%a8">#</a>
+</h3>
+<p>为了修改 patch 的前缀，可以使用 &ndash;subject-prefix 选项</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git format-patch -1 --subject-prefix<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;PATCH v2&#34;</span>
+</code></pre></div><p>生成多个 patch (patch set)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git format-patch -2 --subject-prefix<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;PATCH v2&#34;</span>
+0001-clk-imx-clk-imx8mp-use-dev_-managed-memory-to-avoid-.patch
+0002-clk-imx-clk-imx8mp-add-error-handling-of-of_clk_add_.patch
+
+$ sed -n 4p ./0001-clk-imx-clk-imx8mp-use-dev_-managed-memory-to-avoid-.patch
+Subject: <span style="color:#f92672">[</span>PATCH v2 1/2<span style="color:#f92672">]</span> clk: imx: clk-imx8mp: use dev_ managed memory to avoid
+</code></pre></div><h3 id="我对分配给我的任务感到困难我应该向谁寻求帮助">
+  我对分配给我的任务感到困难，我应该向谁寻求帮助？
+  <a class="anchor" href="#%e6%88%91%e5%af%b9%e5%88%86%e9%85%8d%e7%bb%99%e6%88%91%e7%9a%84%e4%bb%bb%e5%8a%a1%e6%84%9f%e5%88%b0%e5%9b%b0%e9%9a%be%e6%88%91%e5%ba%94%e8%af%a5%e5%90%91%e8%b0%81%e5%af%bb%e6%b1%82%e5%b8%ae%e5%8a%a9">#</a>
+</h3>
+<ol>
+<li>先问自己啦，参考我们内部的邮件列表中的讨论，由于我们的 issue 大多数是由 smatch 扫描出来的，里面有很多相同类型的问题，也许你的问题就可以在邮件列表里找到答案</li>
+<li>参考历史 patch 的写法。用 git blame 看看这个文件的修改历史，或者同一文件夹下其他文件的修改历史，可能可以得到启发</li>
+<li>向 Copilot 或直接在群里提问</li>
+</ol>
+<h3 id="我发现我得到的任务是-false-positive我应该怎么办">
+  我发现我得到的任务是 False Positive，我应该怎么办？
+  <a class="anchor" href="#%e6%88%91%e5%8f%91%e7%8e%b0%e6%88%91%e5%be%97%e5%88%b0%e7%9a%84%e4%bb%bb%e5%8a%a1%e6%98%af-false-positive%e6%88%91%e5%ba%94%e8%af%a5%e6%80%8e%e4%b9%88%e5%8a%9e">#</a>
+</h3>
+<p>可以把问题发到邮件列表里，或者在群里大家一起讨论</p>
+<h3 id="patch-中的-fixes-标签是什么意思我何时应当添加要怎么添加">
+  Patch 中的 Fixes 标签是什么意思？我何时应当添加？要怎么添加？
+  <a class="anchor" href="#patch-%e4%b8%ad%e7%9a%84-fixes-%e6%a0%87%e7%ad%be%e6%98%af%e4%bb%80%e4%b9%88%e6%84%8f%e6%80%9d%e6%88%91%e4%bd%95%e6%97%b6%e5%ba%94%e5%bd%93%e6%b7%bb%e5%8a%a0%e8%a6%81%e6%80%8e%e4%b9%88%e6%b7%bb%e5%8a%a0">#</a>
+</h3>
+<ol>
+<li>
+<p>Fixes: 表示这个Patch修复了一个之前commit引入的问题。这样做是为了更方便地使定位bug的起源，以帮助修复Bug。这个标签同样辅助stable内核团队确定这个patch应该打到那些版本的stable内核上。This is the preferred method for indicating a bug fixed by the patch. See Describe your changes for more details.</p>
+</li>
+<li>
+<p>步骤</p>
+</li>
+<li>
+<p>首先，如果之前使用git checkout -b新建分支，那么在查找Fixes之前需要切换到master分支，参考命令`git switch master``</p>
+</li>
+<li>
+<p>使用 <code>git blame {file_path}</code> 查看引入bug代码的commit hash，例如 <code>git blame drivers/clk/imx/clk-imx8mn.c</code> 之后定位到进入代码的行数</p>
+</li>
+</ol>
 </article>
  
       
@@ -168,16 +396,10 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/commit/d12e6a2a53d53b7ab1501f7391b23914666fb24b" title='最后修改者 jingfelix | January 19, 2024' target="_blank" rel="noopener">
-      <img src="/docs/svg/calendar.svg" class="book-icon" alt="Calendar" />
-      <span>January 19, 2024</span>
-    </a>
-  </div>
-
 
 
   <div>
-    <a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/edit/main/exampleSite/content.zh/docs/Kernel-FAQ.md" target="_blank" rel="noopener">
+    <a class="flex align-center" href="https://github.com/jingfelix/docs/edit/main/exampleSite/content.zh/docs/Kernel-FAQ/index.md" target="_blank" rel="noopener">
       <img src="/docs/svg/edit.svg" class="book-icon" alt="Edit" />
       <span>编辑本页</span>
     </a>
@@ -213,7 +435,30 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#kernel-contribution-faq">Kernel Contribution FAQ</a></li>
+    <li><a href="#kernel-contribution-faq">Kernel Contribution FAQ</a>
+      <ul>
+        <li><a href="#注意事项">注意事项</a></li>
+        <li><a href="#issue-修复参考">Issue 修复参考</a>
+          <ul>
+            <li><a href="#missing-unwind-goto-">Missing unwind goto &hellip;</a></li>
+            <li><a href="#xxx-is-an-error-pointer-or-valid">XXX is an error pointer or valid</a></li>
+          </ul>
+        </li>
+        <li><a href="#patch-相关问题">Patch 相关问题</a>
+          <ul>
+            <li><a href="#我应该何时添加-reviewed-by-标签">我应该何时添加 Reviewed-by 标签？</a></li>
+            <li><a href="#commit-title-前面的-xxx-yyy-是什么如何编写合适的-commit-title">Commit Title 前面的 xxx: yyy: 是什么？如何编写合适的 Commit Title？</a></li>
+            <li><a href="#我在发送第二版-patch-时需要注意什么">我在发送第二版 Patch 时需要注意什么？</a></li>
+            <li><a href="#把-patch-发送到内核邮件列表之后很长时间没有回复怎么办">把 Patch 发送到内核邮件列表之后很长时间没有回复怎么办？</a></li>
+            <li><a href="#我的第一版-patch-存在问题如何在第一版的基础上生成第二版的-format-patch">我的第一版 Patch 存在问题，如何在第一版的基础上生成第二版的 format-patch？</a></li>
+            <li><a href="#内核邮件列表中-patch-主题的-patch--xx-都是什么意思我要怎么使用">内核邮件列表中 PATCH 主题的 [PATCH  xx] 都是什么意思？我要怎么使用？</a></li>
+            <li><a href="#我对分配给我的任务感到困难我应该向谁寻求帮助">我对分配给我的任务感到困难，我应该向谁寻求帮助？</a></li>
+            <li><a href="#我发现我得到的任务是-false-positive我应该怎么办">我发现我得到的任务是 False Positive，我应该怎么办？</a></li>
+            <li><a href="#patch-中的-fixes-标签是什么意思我何时应当添加要怎么添加">Patch 中的 Fixes 标签是什么意思？我何时应当添加？要怎么添加？</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ul>
 </nav>
 

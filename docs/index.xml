@@ -6,12 +6,29 @@
     <description>Recent content on HUSTSecLab Docs</description>
     <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.xcodesucks.top/docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title></title>
+      <title>Kernel Contrbution</title>
+      <link>https://www.xcodesucks.top/docs/docs/Kernel-Contribution/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.xcodesucks.top/docs/docs/Kernel-Contribution/</guid>
+      <description>Kernel Contribution #  TODO</description>
+    </item>
+    
+    <item>
+      <title>Kernel FAQ</title>
       <link>https://www.xcodesucks.top/docs/docs/Kernel-FAQ/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://www.xcodesucks.top/docs/docs/Kernel-FAQ/</guid>
-      <description>Kernel Contribution FAQ #  </description>
+      <description>Kernel Contribution FAQ #  注意事项 #    在git format-patch生成patch文件以后，使用./scripts/checkpatch.pl ${PATCH_FILE}检查patch文件时，warning是不可忽略的。
+  git send-email时出现的很多错误可以用重发几次的方法解决。
+   https://docs.kernel.org/process/submitting-patches.html
+  可以在https://groups.google.com/g/hust-os-kernel-patches查看团队过去发送的patch。
+  请在 gitconfig 中将 name 设置成自己的真名。
+  Issue 修复参考 #  Missing unwind goto &amp;hellip; #  参考 Dan 的 Blog：内核错误处理规范
+ https://staticthinking.wordpress.com/2022/04/28/free-the-last-thing-style/
+XXX is an error pointer or valid #  Return from debugfs_create_dir
+Debugfs is kind of weird. The correct thing here is just to delete the NULL check.</description>
     </item>
     
   </channel>
