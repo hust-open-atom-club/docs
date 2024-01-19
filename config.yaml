@@ -4,6 +4,8 @@
 title: HUSTSecLab Docs
 theme: hugo-book
 
+publishDir: docs
+
 # Book configuration
 disablePathToLower: true
 enableGitInfo: true
