@@ -1,7 +1,11 @@
 .PHONY: build
 
-build: build-readme
+check:
 	@command -v hugo >/dev/null 2>&1 || { echo "Command not found: hugo"; exit 1; }
+	@echo "Checking..."
+	@hugo version
+
+build: check build-readme
 	@echo "Building site..."
 	hugo
 
@@ -24,6 +28,10 @@ build-readme:
 	@rm list.txt
 	@rm menu.txt
 	@echo "Done."
+
+serve: check
+	@echo "Serving site..."
+	hugo server --minify
 
 clean:
 	@echo "Cleaning..."
