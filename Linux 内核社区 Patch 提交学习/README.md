@@ -1,7 +1,5 @@
 # Getting Start：Linux 内核
 
----
-
 # 任务领取
 
 任务列表的链接在 [HUST OS Kernel Contribution Team](https://ixy0caf7465.feishu.cn/wiki/SyywwBKU5iBzpJkOyk2cMKLin1c?from=from_copylink) 的**新手任务**数据表
@@ -25,15 +23,15 @@ ERROR: space required after that ',' (ctx:VxV)
 
 # 获取内核代码仓库
 
-**注：**请大家使用 `linux-next` 仓库。使用 `linux` 主线仓库经常出现我们写好 patch 发送之后发现已经被人修复的情况，虽然 `linux-next` 也不能避免但总会好一些。
+**注**：请大家使用 `linux-next` 仓库。使用 `linux` 主线仓库经常出现我们写好 patch 发送之后发现已经被人修复的情况，虽然 `linux-next` 也不能避免但总会好一些。
 
-使用 `git clone` 获取源代码，推荐使用俱乐部组建的镜像站（https://mirrors.hust.college/）：
+使用 `git clone` 获取源代码，推荐使用俱乐部组建的镜像站（<https://mirrors.hust.edu.cn/>）：
 
 ```shell
 git clone https://mirrors.hust.college/git/linux-next.git
 ```
 
-也可以使用 linux 官方的 git 仓库：[https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/)
+也可以使用 linux 官方的 git 仓库：<https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/>
 
 不会使用 git 的同学请自行搜索学习相关的指令和概念，git 是一种流行的版本管理工具，在开源社区协作的工作中有着重要的作用，请务必熟练掌握基本的用法
 
@@ -76,9 +74,10 @@ git commit -asev
 ```
 
 > 注意这里添加了 `-s` 的 option，目的是为了在 commit message 中添加签名（Signed-off-by 字段），正常情况下，上述指令会打开编辑器，且其中包含如下内容：
-> Signed-off-by: Yalong Zou <yalongz@hust.edu.cn>
+> 
+> Signed-off-by: Yalong Zou &lt;<yalongz@hust.edu.cn>&gt;
 
-Commit Message 的编写也需要遵循内核的规范（[https://www.kernel.org/doc/html/latest/process/submitting-patches.html](https://www.kernel.org/doc/html/latest/process/submitting-patches.html)）。我们主要注意以下几点：
+Commit Message 的编写也需要遵循内核的规范（<https://www.kernel.org/doc/html/latest/process/submitting-patches.html>）。我们主要注意以下几点：
 
 1. 一行不要超过 75 个字符，如果太长的话需要换行
 2. 每一段结束后需要留一个空行
@@ -159,6 +158,6 @@ git send-email \
 
 # Further Reading
 
-- [传统操作系统内核社区贡献指引](https://ixy0caf7465.feishu.cn/wiki/ZfDPwMOE7icmkCkmzXBcBrUqnog)
-- [内核 Patch FAQ](https://ixy0caf7465.feishu.cn/wiki/K9zVw6nGAicMRCkaM1fcWx3Onhh)
+- [传统操作系统内核社区贡献指引](./传统操作系统内核社区贡献指引.md)
+- [内核 Patch FAQ](./Linux%20内核%20Patch%20FAQ.md)
 - [Submitting patches: the essential guide to getting your code into the kernel](https://www.kernel.org/doc/html/latest/process/submitting-patches.html)
