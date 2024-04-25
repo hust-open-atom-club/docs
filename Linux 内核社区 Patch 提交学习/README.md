@@ -4,13 +4,40 @@
 
 **注**：请大家使用 `linux-next` 仓库。使用 `linux` 主线仓库经常出现我们写好 patch 发送之后发现已经被人修复的情况，虽然 `linux-next` 也不能避免但总会好一些。
 
+`linux-next` 树是一个窗口树，用于合并子系统树中的补丁。
+
+> 警告！
+> 
+> 正因为 `linux-next` 是临时版本，所以其 master 分支仅仅代表最新版本， 如果 HEAD 追踪 master 分支，在使用 `git pull` 更新 master 时，会出现各种无法预料的错误。
+> 
+> 而正确的做法应该是 clone 主线分支，而把 linux-next 作为另外一个 remote，使用标签去追踪 commit。
+
 使用 `git clone` 获取源代码，推荐使用俱乐部组建的镜像站（<https://mirrors.hust.edu.cn/>）：
 
 ```shell
-git clone https://mirrors.hust.edu.cn/git/linux-next.git
+# 克隆 linux 源代码
+git clone https://mirrors.hust.edu.cn/git/linux.git
+
+# 将 linux-next 作为一个新的 remote，并更新本地分支和标签
+git remote add linux-next https://mirrors.hust.edu.cn/git/linux-next.git
+git fetch linux-next
+git fetch --tags linux-next
+
+# 检出 linux-next 的 commit
+git tag -l "next-*" | tail
+
+# git 工具会输出类似下面的结果
+next-20231101
+next-20231102
+...
+
+# 然后通过 tag 检出到新的本地分支
+git checkout -b new_local_branch next-20231101
 ```
 
-也可以使用 linux 官方的 git 仓库：<https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/>
+最后在本地的 `new_local_branch` 开展你的工作。
+
+也可以使用 linux 官方的 git 仓库：
 
 ```shell
 git clone https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
