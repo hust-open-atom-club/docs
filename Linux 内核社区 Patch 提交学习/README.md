@@ -49,7 +49,7 @@ git clone https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
 
 ## 发现代码问题
 
-> 案例代码中的问题存在于 `linux-next` 仓库中的 `next-20231013`
+> 案例代码中的问题存在于 `linux-next` 仓库中的 `next-20240424`
 
 代码中存在的问题通常是扫描工具的输出，其中可能含有一些格式信息，如下便是 `checkpatch.pl`（一种检测内核 patch 格式的工具）的输出：
 
