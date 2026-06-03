@@ -213,10 +213,10 @@ AI/LLM 工具辅助产生的内容，必须遵守目标项目的编码规范、�
 ## 参考资料
 
 - [Linux 内核官方 AI 辅助编码准则（随 Linux 7.0 发布）](https://docs.kernel.org/process/coding-assistants.html)
-- [Linux 内核工具生成内容指南](https://docs.kernel.org/process/tool-generated-content.html)
+- [Linux 内核工具生成内容指南](https://docs.kernel.org/process/generated-content.html)
 - [Sasha Levin 提交的 RFC 补丁系列及社区讨论](https://lwn.net/Articles/1031473/)
 - [内核最终策略解读](https://www.zdnet.com/article/linus-torvalds-and-maintainers-finalize-ai-policy-for-linux-kernel-developers/)
-- [Linus Torvalds 关于 AI 政策的 LKML 表态](https://lore.kernel.org/lkml/CAHk-=wjUxV=B+Gj6nFdm-Pek3AcO=e1Qqr1n0gMqjKys19fJhg@mail.gmail.com/)
-- [Greg Kroah-Hartman 关于 AI 代码法律责任的说明](https://lore.kernel.org/lkml/20250115-achtung-ai-b8dd83@kroah.com/)
+- [Linus Torvalds 关于 AI 政策的 LKML 表态](https://lkml.org/lkml/2026/1/7/1888)
+- [Greg Kroah-Hartman 关于 AI 代码法律责任的说明](https://lwn.net/Articles/1049830/)
 
 Assisted-by: Claude Code + DeepSeek V4 Pro
