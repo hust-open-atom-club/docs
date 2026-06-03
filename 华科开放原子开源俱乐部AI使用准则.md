@@ -218,3 +218,5 @@ AI/LLM 工具辅助产生的内容，必须遵守目标项目的编码规范、�
 - [内核最终策略解读](https://www.zdnet.com/article/linus-torvalds-and-maintainers-finalize-ai-policy-for-linux-kernel-developers/)
 - [Linus Torvalds 关于 AI 政策的 LKML 表态](https://lore.kernel.org/lkml/CAHk-=wjUxV=B+Gj6nFdm-Pek3AcO=e1Qqr1n0gMqjKys19fJhg@mail.gmail.com/)
 - [Greg Kroah-Hartman 关于 AI 代码法律责任的说明](https://lore.kernel.org/lkml/20250115-achtung-ai-b8dd83@kroah.com/)
+
+Assisted-by: Claude Code + DeepSeek V4 Pro
